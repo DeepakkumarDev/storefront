@@ -17,8 +17,9 @@ class Collection(models.Model):
 class Product(models.Model):
     # sku = models.CharField(max_length=10,primary_key=True) # if do so django is not going to creted primary key for this model
     title = models.CharField(max_length=255)
+    slug = models.SlugField(default='-')#null=true
     description = models.TextField()
-    price = models.DecimalField(max_digits=6,decimal_places=2) # These two field are required
+    unit_price = models.DecimalField(max_digits=6,decimal_places=2) # These two field are required
     inventory = models.IntegerField()
     last_update =models.DateTimeField(auto_now=True)
     collection = models.ForeignKey(Collection,on_delete=models.PROTECT)
@@ -43,6 +44,11 @@ class Customer(models.Model):
     phone = models.CharField(max_length= 15)
     birth_date = models.DateField(null=True)
     membership = models.CharField(max_length=1,choices=MEMBERSHIP_CHOICES,default= MEMBERSHIP_BRONZE )
+    # class Meta:
+    #     db_table = 'store_customers'
+    #     indexes =[
+    #         models.Index(fields=['last_name','first_name'])
+    #     ]
 
 
 
@@ -77,12 +83,12 @@ class OrderItem(models.Model):
 #     street = models.CharField(max_length=255)
 #     city = models.CharField(max_length=255)
 #     customer = models.OneToOneField(Customer,on_delete=models.CASCADE,primary_key=True) 
-    # # when we delete a model custmer address also be delete it called the cascading behaviour
-    # customer = models.OneToOneField(Customer,on_delete=models.SET_NULL,primary_key=True)
-    # # in this case when we delete customer as parent then its child is not going to be delete but in this case we should use  model cascading behaviour
-    # customer = models.OneToOneField(Customer,on_delete=models.PROTECT,primary_key=True)
-    # # it will prevent from deleting and custome is going to be null but in this case it is not appropritae why and how? 
-    # customer = models.OneToOneField(Customer,on_delete=models.SET_DEFAULT,primary_key=True)
+#     when we delete a model custmer address also be delete it called the cascading behaviour
+#     customer = models.OneToOneField(Customer,on_delete=models.SET_NULL,primary_key=True)
+#     in this case when we delete customer as parent then its child is not going to be delete but in this case we should use  model cascading behaviour
+#     customer = models.OneToOneField(Customer,on_delete=models.PROTECT,primary_key=True)
+#     it will prevent from deleting and custome is going to be null but in this case it is not appropritae why and how? 
+#     customer = models.OneToOneField(Customer,on_delete=models.SET_DEFAULT,primary_key=True)
 
 # Defining one to many Relationship
 
