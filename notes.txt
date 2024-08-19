@@ -1,0 +1,126 @@
+Introduction to data modeling
+Building an e-commerce data mo
+
+organizing models in apps
+coding model classes
+
+
+introduction to data modeling
+
+product 
+title
+description
+price
+inventory
+
+Collection
+title
+
+
+
+we have to esatblish or association between product and collection 
+1 to many relationship benween product and collection
+
+
+
+
+relationship can be 
+one to one
+one to many
+many to many
+
+
+Building an Ecommerce Data model
+
+product 0-1 collection
+
+
+
+product *-* cart (many to many from product to cart)
+        created_at
+
+            |
+            |
+            |
+ product 1 -* cartItem-0-1 -cart
+        quantity
+Cartitem is an association class
+
+any one can have cart whether they are regostered user or not
+
+
+product     customer
+
+     *-*       order*-1
+
+many to many relationship with product and order 
+and 1 to many relationship with customer and order
+
+ordeitem is association class between prodcut and order
+
+product to order item one to many relationship
+
+
+prodcut *-* tag
+
+product to tag can have many to many relationship
+
+
+
+apps in django has different functionality
+
+
+we can have single apps like store
+product
+collection
+cart
+cartitem
+order
+orderitem
+customer
+
+But theres is a problem here
+as this application grow it will be loded with too many fields
+
+
+this is called Monolith 
+it will radd to use and modify
+
+we van brek it into many apps
+products         customers      cart        orders
+product           customer      cart        order
+collection                      cartitem    orderitem 
+tag
+
+
+carts depend on products applicationorders depend on cart and customers app
+but there is problem
+
+if you publish a products that migh cost cart and orders app
+since we need to upgrade all the app together more work
+and downot make sense  having shping cart functility without having product catalog
+
+
+
+so we should crete a two app one is store and another tags
+store               tags
+product             Tag
+collection          TaggedItem
+customer
+cart
+cartitem
+order
+orderitem
+it is self contained and zero coupling
+we should desgin MINIMAL COUPLING
+HIGH COHESION (FOCUS)
+
+python3 manage.py startapp store
+python3 manage.py startapp tags
+
+
+registered with installed apps in settings
+
+field types
+field options
+we geneteare the databse table using the defintion of model
