@@ -1,0 +1,38 @@
+# Python-specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+
+# Virtual environment
+venv/
+env/
+.venv/
+.env/
+
+# Dependency management
+
+# IDEs and editors
+.vscode/
+
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Other files
+*.csv
+*.xls
+*.xlsx
+*.pdf
+*.docx
+*.pptx
+
+# Docker
+docker-compose.override.yml
+*.dockerignore
